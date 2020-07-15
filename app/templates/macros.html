@@ -1,0 +1,8 @@
+{% macro display(category_list) %}
+
+		{% for category in category_list %}
+			<li>{{category.title}}</li>
+
+		{% endfor %}
+
+{% endmacro %}
