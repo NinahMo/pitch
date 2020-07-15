@@ -1,5 +1,8 @@
-from flask import render_template
-from app import app
+from flask import render_template,request,redirect,url_for
+from . import main
+from ..models import Pitch,User,Comment,Upvote,Downvote
+from .forms import PitchForm,UpvoteForm,DownvoteForm
+
 
 # Views
 @main.route('/', methods = ['GET,'POST])
