@@ -9,14 +9,15 @@ class ProdConfig(Config):
     '''
     Parental production  configuration child class
     '''
-    pass
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
 
 class DevConfig(Config):
     '''
      The development  configuration child class
     '''
-
+    
+    SQLALCHEMY_DATABASE_URI=''
     DEBUG = True
     
 config_options = {

@@ -11,16 +11,14 @@ def create_app(config_name):
     # Initializing application
     app = Flask(__name__)
 
-    # Setting up configurations
-    app.config.from_object(DevConfig)
-    app.config.from_pyfile('config.py')
-
+    # Creating the app configurations
+    app.config.from_object(config_options[config_name])
 
     # Initializing flask extensions
     bootstrap.init_app(app)
-    db.init_app(app)
 
-    from app import views
-    from app import errors
+    # Registering the blueprint
+    from .main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
 
-
+    return app
