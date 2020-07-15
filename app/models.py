@@ -16,7 +16,7 @@ class User(db.Model):
         return f'User {self.username}'       
 
 
-class Pitch(db,Model):
+class Pitch(db.Model):
     __tablename__ = 'pitches'
 
     id = db.Column(db.Integer, primary_key = True)
@@ -37,7 +37,7 @@ class Pitch(db,Model):
         return f'Pitch {self.description}'
 
 
-class Upvote(db,Model):
+class Upvote(db.Model):
     __tablename__ = 'upvotes'
 
     id = db.Column(db.Integer,primary_key=True)

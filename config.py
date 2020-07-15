@@ -3,7 +3,7 @@ import os
 class Config:
 
     SECRET_KEY ='4167'
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:Mozzy123@localhost/watchlist'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:Mozzy123@localhost/pitch'
 
 class ProdConfig(Config):
     '''
@@ -17,7 +17,7 @@ class DevConfig(Config):
      The development  configuration child class
     '''
     
-    SQLALCHEMY_DATABASE_URI=''
+    SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://postgres:Mozzy123@localhost/pitch'
     DEBUG = True
     
 config_options = {
