@@ -21,5 +21,6 @@ def create_app(config_name):
     db.init_app(app)
 
     from app import views
+    from app import errors
 
 
