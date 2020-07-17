@@ -6,6 +6,7 @@ class User(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255))
     email = db.Column(db.String(255),unique = True,index = True)
+    role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
     pass_secure = db.Column(db.String(255))
     pitch = db.relationship('Pitch', backref='user', lazy='dynamic')
     comment = db.relationship('Comment', backref='user', lazy='dynamic')
@@ -14,6 +15,17 @@ class User(db.Model):
 
     def __repr__(self):
         return f'User {self.username}'       
+
+
+class Role(db.Model):
+    __tablename__ = 'roles'
+
+    id = db.Column(db.Integer,primary_key = True)
+    name = db.Column(db.String(255))
+    users = db.relationship('User',backref = 'role',lazy="dynamic")
+
+    def __repr__(self):
+        return f'User {self.name}'
 
 
 class Pitch(db.Model):
@@ -35,6 +47,19 @@ class Pitch(db.Model):
 
     def __repr__(self):
         return f'Pitch {self.description}'
+
+class Comment(db.Model):
+    __tablename__='comments'
+    
+    id = db.Column(db.Integer,primary_key=True)
+    pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable= False)
+    description = db.Column(db.Text)
+
+    
+    def __repr__(self):
+        return f"Comment : id: {self.id} comment: {self.description}"
+
 
 
 class Upvote(db.Model):

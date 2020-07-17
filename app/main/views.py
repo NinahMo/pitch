@@ -1,8 +1,8 @@
 from flask import render_template,request,redirect,url_for
 from . import main
 from flask_login import login_required, current_user
-from ..models import Pitch,User,Upvote,Downvote
-from .forms import PitchForm,UpvoteForm,DownvoteForm
+from ..models import Pitch,User,Comment,Upvote,Downvote
+from .forms import PitchForm,CommentForm,UpvoteForm,DownvoteForm
 
 
 # Views
@@ -38,14 +38,23 @@ def new_pitch():
         new_pitch = Pitch(owner_id = current_user._get_current_object().id, title = title, description=description, category=category)
 
 
+@main.route('/comment/new/<int:pitch_id>', methods = ['GET','POST'])
+@login_required
+def new_comment(pitch_id):
+    form = CommentForm()
+    pitch=Pitch.query.get(pitch_id)
+    if form.validate_on_submit():
+        description = form.description.data
+
+        new_comment = Comment(description = description, user_id = current_user._get_current_object().id, pitch_id = pitch_id)
+        db.session.add(new_comment)
+        db.session.commit()
 
 
+        return redirect(url_for('.new_comment', pitch_id= pitch_id))
 
-
-
-
-
-
+    all_comments = Comment.query.filter_by(pitch_id = pitch_id).all()
+    return render_template('comments.html', form = form, comment = all_comments, pitch = pitch )
 
 
 @main.route('/pitch/upvote/<int:pitch_id>/upvote', methods = ['GET', 'POST'])

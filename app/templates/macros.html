@@ -26,3 +26,25 @@
 	{% endif %}
 </div>
 {% endmacro %}
+
+{% macro displayComment(comments) %}
+<ul>
+
+			{% if comments %}
+			{% for comment in comments %}
+				<div class="row text-center">
+						<a><p style="color: brown">{{ comment.description }}</p></a>
+						<small> posted by {{comment.user.username}}</small>
+				</div>
+			{% endfor %}
+			{% else %}
+
+			<h3>This post does  not does not have any comments yet !</h3>
+			{%endif%}
+
+	</ul>
+	
+			
+
+
+{% endmacro %}
