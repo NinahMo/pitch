@@ -4,6 +4,7 @@ from flask_login import login_required, current_user
 from ..models import Pitch,User,Comment,Upvote,Downvote
 from .forms import PitchForm,CommentForm,UpvoteForm,DownvoteForm
 from .. import db,photos
+import markdown2 
 
 
 # Views
