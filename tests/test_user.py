@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 import unittest
-from .app import db
+from app import db
 from app.models import User, Pitch
 
 class UserModelCase(unittest.TestCase):
@@ -14,7 +14,6 @@ class UserModelCase(unittest.TestCase):
         u.set_password('1234')
         self.assertFalse(u.check_password('pass123'))
         self.assertTrue(u.check_password('1234'))
-    def test_save_user(self):
     def test_check_instance_variables(self):
         self.assertEquals(self.user_James.username,'James')
         self.assertEquals(self.user_James.password,'potato')
